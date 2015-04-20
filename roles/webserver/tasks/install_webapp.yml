@@ -1,6 +1,10 @@
 ---
+- name: Remove existing deployment
+  file: path="{{tomcat_home}}/webapps/sample" state=absent
+
 - name: Install webapp
-  copy: 
+  copy: src="../files/sample.war" dest="{{tomcat_home}}/webapps"
  
-- name: Start webapp
-  service: name="apache2" state=restarted
+- name: Start Tomcat
+  command: "nohup {{tomcat_home}}/bin/startup.sh"
+  

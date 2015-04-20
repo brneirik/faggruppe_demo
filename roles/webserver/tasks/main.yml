@@ -1,11 +1,11 @@
 ---
-- include: apache.yml
-  tags: [webserver_dependencies]
-  
-- include: nginx.yml
-  tags: [webserver_dependencies]
+#- include: nginx.yml
+#  tags: [webserver_dependencies]
   
 - include: java8.yml
+  tags: [webserver_dependencies]
+
+- include: apache.yml
   tags: [webserver_dependencies]
 
 - include: install_webapp.yml

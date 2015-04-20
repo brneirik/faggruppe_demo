@@ -3,7 +3,6 @@
   remote_user: "{{user}}" 
   sudo: yes
   roles:
-     - webserver
-  environment: 
-  	CATALINA_HOME: "{{tomcat_dir}}"
-  	PATH: "{{tomcat_dir}}/bin"
+    - common 
+    - webserver
+
