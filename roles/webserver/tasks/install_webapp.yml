@@ -1,0 +1,6 @@
+---
+- name: Install webapp
+  copy: 
+ 
+- name: Start webapp
+  service: name="apache2" state=restarted

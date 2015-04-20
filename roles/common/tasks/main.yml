@@ -1,0 +1,10 @@
+---
+- name: Ensure wget installed
+  yum: name="wget" state=installed
+
+- name: Ensure unzip installed
+  yum: name="unzip" state=installed 
+
+- name: Ensure rsync installed
+  yum: name="rsync" state=installed 
+

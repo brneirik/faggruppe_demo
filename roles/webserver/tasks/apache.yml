@@ -1,0 +1,4 @@
+---
+- name: Ensure apache installed
+  yum: name="{{apache}}" state=installed
+  when: clean_install == true
