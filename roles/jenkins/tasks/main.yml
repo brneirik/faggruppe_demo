@@ -1,12 +1,35 @@
 ---
-#- include: nginx.yml
-#  tags: [webserver_dependencies]
+- name: Install Jenkins | Add Jenkins repository key
+  apt_key:
+    url: "https://pkg.jenkins.io/debian/jenkins-ci.org.key"
+    state: present
+  ignore_errors: true
+
+- name: Install Jenkins | Add apt repo
+  apt_repository:
+    repo: deb http://pkg.jenkins.io/debian-stable binary
+    state: present
+
+- name: Install Jenkins | Install Jenkins from apt
+  apt: 
+    name: jenkins 
+    state: present
+    update_cache: yes 
+    cache_valid_time: 86400
+
+- name: Install Nginx 
+  apt: 
+    name: nginx 
+    state: present
+
+- name: Ensure nginx default config removed
+  file: 
+    path: /etc/nginx/sites-available
+    state: absent
+
+- name: Ensure Jenkins nginx config present
+  copy: src="{{item}}" dest="/etc/nginx/sites-available/" owner="root" group="root" mode="0644" backup=yes
+  with_items:
+    - "jenkins"
+  register: result
   
-- include: java8.yml
-  tags: [webserver_dependencies]
-
-- include: apache.yml
-  tags: [webserver_dependencies]
-
-- include: install_webapp.yml
-  tags: [webserver_apps]

@@ -5,6 +5,6 @@
   roles:
     #- common 
     - docker
-   # - jenkins
+    - jenkins
    # - fagdag
 
