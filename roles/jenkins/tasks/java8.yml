@@ -1,0 +1,3 @@
+---
+- name: Ensure Java installed
+  yum: name="{{java_version}}" state=installed

@@ -1,0 +1,17 @@
+---
+- name: Install | Legg til nginx-repo
+  yum: name="{{nginx_rpm_repo_url}}"
+
+- name: Install nginx
+  yum: name="nginx" state=latest
+  
+- name: Transfer nginx proxy config files
+  copy: src="{{item}}" dest="/etc/nginx/" owner="root" group="root" mode="0644" backup=yes
+  with_items:
+    - "nginx.conf"
+  register: result
+  
+- name: Restart nginx
+  service: name="nginx" state=restarted
+  when: result.changed
+  ignore_errors: true 

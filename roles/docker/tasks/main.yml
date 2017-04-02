@@ -1,0 +1,30 @@
+---
+
+- name: Install Docker | Install support packages apt-transport-https
+  apt: 
+    name: apt-transport-https
+    state: present
+
+- name: Install Docker | Install support packages ca-certificates
+  apt: 
+    name: ca-certificates
+    state: present
+
+- name: Install Docker | Install support packages curl 
+  apt: 
+    name: curl 
+    state: present  
+
+- name: Install Docker | Install support packages software-properties-common 
+  apt: 
+    name: software-properties-common 
+    state: present  
+
+- name: Add Docker repository key
+  apt_key:
+    id: "9DC858229FC7DD38854AE2D88D81803C0EBFCD88"
+    keyserver: "https://download.docker.com/linux/ubuntu/gpg"
+    state: present
+  register: add_repository_key
+  ignore_errors: true
+

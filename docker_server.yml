@@ -1,0 +1,10 @@
+---
+- hosts: "{{hosts}}" 
+  remote_user: "{{user}}" 
+  sudo: yes
+  roles:
+    - common 
+    - docker
+    - jenkins
+    - fagdag
+
