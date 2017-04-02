@@ -5,10 +5,13 @@
     state: present
   ignore_errors: true
 
+- name: "Install Jenkins - Check if jenkins.list exists"
+  stat: path="/etc/apt/sources.list.d/jenkins.list"
+  register: result
+
 - name: Install Jenkins | Add apt repo
-  apt_repository:
-    repo: deb http://pkg.jenkins.io/debian-stable binary
-    state: present
+  command: "sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'"
+  when: (not result.stat.exists)
 
 - name: Install Jenkins | Install Jenkins from apt
   apt: 
@@ -33,3 +36,7 @@
     - "jenkins"
   register: result
   
+- name: Restart nginx
+  service: name="nginx" state=restarted
+  when: result.changed
+  ignore_errors: true 
