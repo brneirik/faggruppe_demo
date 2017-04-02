@@ -1,10 +1,10 @@
 ---
 - hosts: "{{hosts}}" 
   remote_user: "{{user}}" 
-  sudo: yes
+  become: true
   roles:
-    - common 
+    #- common 
     - docker
-    - jenkins
-    - fagdag
+   # - jenkins
+   # - fagdag
 
