@@ -1,12 +1,20 @@
 ---
-#- include: nginx.yml
-#  tags: [webserver_dependencies]
-  
-- include: java8.yml
-  tags: [webserver_dependencies]
+- name: Pull Jenkins image
+  docker_image:
+    name: jenkins
 
-- include: apache.yml
-  tags: [webserver_dependencies]
+- name: Ensure container directory exists  
+  file: 
+    path: /data/jenkinsWorkshop1
+    state: directiory
+    owner: root
 
-- include: install_webapp.yml
-  tags: [webserver_apps]
+- name: Container present
+  docker_container:
+    name: jenkinsWorkshop1
+    state: started
+    image: jenkins
+    ports: 
+    - "8080:8081"
+    - "50000:50001"
+    volumes: /data/jenkinsWorkshop1:/var/lib/jenkins

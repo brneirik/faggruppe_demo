@@ -6,5 +6,5 @@
     #- common 
     - docker
     - jenkins
-   # - fagdag
+    - fagdag
 
