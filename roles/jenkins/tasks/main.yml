@@ -36,7 +36,7 @@
   register: result
 
 - name: Create symlink to nginx config
-- file:
+  file:
     src: /etc/nginx/sites-available/jenkins
     dest: /etc/nginx/sites-enabled/jenkins
     owner: root
