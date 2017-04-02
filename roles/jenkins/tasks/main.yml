@@ -34,6 +34,14 @@
   with_items:
     - "jenkins"
   register: result
+
+- name: Create symlink to nginx config
+- file:
+    src: /etc/nginx/sites-available/jenkins
+    dest: /etc/nginx/sites-enabled/jenkins
+    owner: root
+    group: root
+    state: link
   
 - name: Restart nginx
   service: name="nginx" state=restarted
